@@ -200,6 +200,8 @@ exports.mapping = {
     IO_ext_board_DI2_Overflow: [198, 2, null, "uint"],
     IO_ext_board_DI3_Overflow: [199, 2, null, "uint"],
     IO_ext_board_DI4_Overflow: [200, 2, null, "uint"],
+    SendInterval: [203, 4, null, "uint"],
+    SampleInterval: [204, 4, null, "uint"],
     DI1_DM: [0x8000 + 1, 1, null, "uint"],
     DI2_DM: [0x8000 + 2, 1, null, "uint"],
     DI3_DM: [0x8000 + 3, 1, null, "uint"],
