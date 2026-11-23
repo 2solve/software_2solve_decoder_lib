@@ -78,7 +78,7 @@ do not read decoded values from it: use the returned `json2sense`.
 
 ### `mappingKeys`
 
-The tag names, in table order (276 tags in v0.25.0).
+The tag names, in table order (276 tags in v0.26.0).
 
 ```js
 const { mappingKeys } = require('@tosolve/datacodec');
@@ -136,6 +136,11 @@ mappingKeys.slice(0, 4); // ['ToSenseID', 'counter', 'epoch', 'BatteryMon']
 
 The full list is `mappingKeys`. A new tag is **added**, never changed: an ID, size or type that changes would break
 every device already in the field.
+
+**A new ID in the firmware needs a new decoder on the gateway first.** A decoder that does not know the ID stops
+reading the frame there: the values after it are lost (plain frame: `errors2sense`; batch frame: `batch2sense.errors`).
+So the decoder with the new tag is released and installed on every gateway **before** the firmware that sends it.
+v0.26.0 adds no tag: it covers IDs 191-200 in the batch frame with tests (`batchNewIds.spec.js`).
 
 ---
 
@@ -215,8 +220,8 @@ npm test
 ```
 
 Tests use [Jest](https://jestjs.io/) and live in `__tests__/`: `packetDecode.spec.js`, `smartWaterTags.spec.js`,
-`nddiTags.spec.js`, `batchFrame.spec.js`, `batteryLevelTags.spec.js`, `nddiChangesOverflowTags.spec.js` and
-`truncatedFrame.spec.js`.
+`nddiTags.spec.js`, `batchFrame.spec.js`, `batteryLevelTags.spec.js`, `nddiChangesOverflowTags.spec.js`,
+`truncatedFrame.spec.js` and `batchNewIds.spec.js`.
 `batchFrame.spec.js` compares every non-batch frame with v0.20.0 (taken from git history).
 
 All tests pass since v0.24.0 (7 tests in `packetDecode.spec.js` were wrong since before v0.20.0 and were fixed).
