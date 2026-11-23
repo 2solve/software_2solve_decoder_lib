@@ -78,7 +78,7 @@ do not read decoded values from it: use the returned `json2sense`.
 
 ### `mappingKeys`
 
-The tag names, in table order (274 tags in v0.23.0).
+The tag names, in table order (276 tags in v0.25.0).
 
 ```js
 const { mappingKeys } = require('@tosolve/datacodec');
@@ -129,6 +129,7 @@ mappingKeys.slice(0, 4); // ['ToSenseID', 'counter', 'epoch', 'BatteryMon']
 | Digital I/O       | `IO_ext_board_DI1`–`DI4`, `IO_ext_board_DO1`–`DO3`, `DI7_ext_board_DI4`–`DI10`, `Relay_stat_DO1`, drain manager `DI1_DM`–`DI8_DM`, `DO1_DM`–`DO14_DM` |
 | Pulse / frequency | `FreInp0`–`FreInp3` (Hz), `IntInp0`–`IntInp3` (count), relay and drain manager states |
 | NanoDAq NDDI      | `IO_ext_board_DI1_Changes`–`DI4_Changes` (state changes since the last uplink), `IO_ext_board_DI1_Overflow`–`DI4_Overflow` (pulse total high part: total = overflow × 2^32 + count; only sent after a wrap) |
+| NanoDAq intervals | `SendInterval`, `SampleInterval` (send and reading interval in force, s; echoed in the plain uplink after a configuration downlink, since v0.25.0) |
 | Engineering units | `EngInp0`–`EngInp3`: value already scaled by the device (e.g. flow); the unit is not in the frame |
 | Vibration         | peak frequency, peak acceleration and RMS, X/Y/Z |
 | Modbus            | 16- and 32-bit registers, signed, unsigned and float |
